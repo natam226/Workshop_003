@@ -3,3 +3,4 @@ venv/
 
 notebooks/catboost_info
 
+streaming/__pycache__

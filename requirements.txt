@@ -8,6 +8,7 @@ attrs==25.3.0
 babel==2.17.0
 beautifulsoup4==4.13.4
 bleach==6.2.0
+catboost==1.2.8
 certifi==2025.4.26
 cffi==1.17.1
 charset-normalizer==3.4.2
@@ -17,10 +18,12 @@ cycler==0.12.1
 debugpy==1.8.14
 decorator==5.2.1
 defusedxml==0.7.1
+et_xmlfile==2.0.0
 executing==2.2.0
 fastjsonschema==2.21.1
 fonttools==4.58.0
 fqdn==1.5.1
+graphviz==0.20.3
 h11==0.16.0
 httpcore==1.0.9
 httpx==0.28.1
@@ -62,6 +65,8 @@ nest-asyncio==1.6.0
 notebook==7.4.2
 notebook_shim==0.2.4
 numpy==2.2.5
+nvidia-nccl-cu12==2.26.5
+openpyxl==3.1.5
 overrides==7.7.0
 packaging==25.0
 pandas==2.2.3
@@ -114,3 +119,4 @@ webcolors==24.11.1
 webencodings==0.5.1
 websocket-client==1.8.0
 widgetsnbextension==4.0.14
+xgboost==3.0.1

@@ -1,5 +1,3 @@
-# kafka_consumer.py
-
 import json
 import pandas as pd
 import psycopg2
@@ -9,19 +7,32 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 
-# Configuración base de datos PostgreSQL
+def load_db_credentials(path='../credentials.json'):
+    with open(path) as f:
+        return json.load(f)
 
 def insert_prediction(cursor, conn, data):
+    data = {
+        'gdp_per_capita': float(data['gdp_per_capita']),
+        'social_support': float(data['social_support']),
+        'life_expectancy': float(data['life_expectancy']),
+        'freedom': float(data['freedom']),
+        'corruption': float(data['corruption']),
+        'region': str(data['region']),
+        'y_real': float(data['y_real']),
+        'y_pred': float(data['y_pred'])
+    }
+
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS predictions (
-            gdp_per_capita REAL,
-            social_support REAL,
-            life_expectancy REAL,
-            freedom REAL,
-            corruption REAL,
-            region TEXT,
-            y_real REAL,
-            y_pred REAL
+            gdp_per_capita NUMERIC(10, 6),
+            social_support NUMERIC(10, 6),
+            life_expectancy NUMERIC(10, 6),
+            freedom NUMERIC(10, 6),
+            corruption NUMERIC(10, 6),
+            region VARCHAR(100),
+            y_real NUMERIC(10, 6),
+            y_pred NUMERIC(10, 6)
         )
     ''')
     conn.commit()
@@ -37,16 +48,14 @@ def insert_prediction(cursor, conn, data):
     conn.commit()
 
 
-def kafka_consumer(y_test_path, model_path='happiness_model.pkl', topic='happiness_topic'):
-    # Conectar a la base de datos
-    conn = psycopg2.connect(**DB_PARAMS)
+def kafka_consumer(y_test_path, model_path='../models/CatBoost_model.pkl', topic='happiness_data_topic', credentials_path='../credentials.json'):
+    db_params = load_db_credentials(credentials_path)
+
+    conn = psycopg2.connect(**db_params)
     cursor = conn.cursor()
 
-    # Cargar valores reales y modelo
-    y_test = pd.read_csv(y_test_path)
     model = joblib.load(model_path)
 
-    # Configurar Kafka
     consumer = KafkaConsumer(
         topic,
         bootstrap_servers='localhost:9092',
@@ -59,19 +68,15 @@ def kafka_consumer(y_test_path, model_path='happiness_model.pkl', topic='happine
     print("[Consumer] Esperando mensajes de Kafka...")
     for i, msg in enumerate(consumer):
         data = msg.value
+
+        y_real = data.pop('y_real')
         df_row = pd.DataFrame([data])
 
-        # Predicción
         y_pred = model.predict(df_row)[0]
-        y_real = y_test.iloc[i].values[0]
 
-        # Combinar y guardar en BD
         prediction_data = {**data, 'y_real': y_real, 'y_pred': y_pred}
         insert_prediction(cursor, conn, prediction_data)
         print(f"[Consumer] Guardado en DB: {prediction_data}")
-
-        if i >= len(y_test) - 1:
-            break
 
     cursor.close()
     conn.close()
