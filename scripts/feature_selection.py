@@ -41,7 +41,46 @@ def load_and_clean_data():
 
 def assign_regions(df):
     region_countries = {
-        'Africa': [
+        'Western Europe': [
+            'Switzerland', 'Iceland', 'Denmark', 'Norway', 'Finland', 'Netherlands',
+            'Sweden', 'Luxembourg', 'Ireland', 'Belgium', 'United Kingdom',
+            'Austria', 'Germany', 'France', 'Spain', 'Malta', 'Italy', 'Portugal',
+            'Greece', 'Cyprus', 'North Cyprus', 'Northern Cyprus'
+        ],
+        'North America': [
+            'Canada', 'United States', 'Mexico'
+        ],
+        'Australia and New Zealand': [
+            'Australia', 'New Zealand'
+        ],
+        'Middle East and Northern Africa': [
+            'Israel', 'United Arab Emirates', 'Oman', 'Saudi Arabia', 'Kuwait',
+            'Bahrain', 'Qatar', 'Jordan', 'Lebanon', 'Turkey', 'Iran', 'Iraq',
+            'Palestinian Territories', 'Yemen', 'Syria', 'Algeria', 'Morocco',
+            'Tunisia', 'Libya', 'Egypt', 'Sudan', 'United Arab Emirates'
+        ],
+        'Latin America and Caribbean': [
+            'Costa Rica', 'Panama', 'El Salvador', 'Guatemala', 'Trinidad and Tobago',
+            'Trinidad & Tobago', 'Jamaica', 'Dominican Republic', 'Nicaragua',
+            'Honduras', 'Haiti', 'Belize', 'Cuba', 'Puerto Rico',
+            'Chile', 'Argentina', 'Uruguay', 'Colombia', 'Suriname',
+            'Ecuador', 'Bolivia', 'Peru', 'Paraguay', 'Venezuela', 'Brazil'
+        ],
+        'Southeastern Asia': [
+            'Singapore', 'Thailand', 'Vietnam', 'Malaysia', 'Indonesia',
+            'Philippines', 'Laos', 'Myanmar', 'Cambodia'
+        ],
+        'Central and Eastern Europe': [
+            'Czech Republic', 'Slovakia', 'Poland', 'Hungary', 'Slovenia', 'Croatia',
+            'Bosnia and Herzegovina', 'Estonia', 'Lithuania', 'Latvia', 'Romania',
+            'Bulgaria', 'Serbia', 'Montenegro', 'North Macedonia', 'Albania',
+            'Kosovo', 'Ukraine', 'Belarus', 'Moldova', 'Russia', 'Macedonia'
+        ],
+        'Eastern Asia': [
+            'Taiwan', 'Japan', 'South Korea', 'Hong Kong', 'Mongolia', 'China',
+            'Taiwan Province of China', 'Hong Kong S.A.R., China'
+        ],
+        'Sub-Saharan Africa': [
             'Mauritius', 'Nigeria', 'Somaliland region', 'Kenya', 'Zambia', 'Zimbabwe',
             'Liberia', 'Namibia', 'Somalia', 'South Africa', 'Niger',
             'Congo (Kinshasa)', 'Uganda', 'Mozambique', 'Senegal', 'Gabon',
@@ -50,49 +89,18 @@ def assign_regions(df):
             'Congo (Brazzaville)', 'Botswana', 'Mali', 'Angola', 'Benin',
             'Burkina Faso', 'Rwanda', 'Togo', 'Burundi', 'South Sudan',
             'Gambia', 'Lesotho', 'Swaziland', 'Cameroon', 'Comoros', 'Ghana',
-            'Djibouti', 'Guinea', 'Algeria', 'Morocco', 'Tunisia', 'Libya', 'Egypt', 'Sudan',
-            'Ivory Coast', 'Somaliland Region'
+            'Djibouti', 'Guinea', 'Ivory Coast', 'Somaliland Region'
         ],
-
-        'Asia': [
-            'Israel', 'United Arab Emirates', 'Oman', 'Saudi Arabia', 'Kuwait',
-            'Bahrain', 'Qatar', 'Jordan', 'Lebanon', 'Turkey', 'Iran', 'Iraq',
-            'Palestinian Territories', 'Yemen', 'Syria', 'Afghanistan',
-            'Bhutan', 'Bangladesh', 'India', 'Nepal', 'Pakistan', 'Sri Lanka',
-            'Uzbekistan', 'Kazakhstan', 'Turkmenistan', 'Kyrgyzstan', 'Tajikistan',
-            'Taiwan', 'Japan', 'South Korea', 'Hong Kong', 'Mongolia', 'China',
-            'Taiwan Province of China', 'Hong Kong S.A.R., China',
-            'Singapore', 'Thailand', 'Vietnam', 'Malaysia', 'Indonesia',
-            'Philippines', 'Laos', 'Myanmar', 'Cambodia',
-            'Armenia', 'Azerbaijan', 'Georgia', 'United Arab Emirates'
+        'Southern Asia': [
+            'Afghanistan', 'Bhutan', 'Bangladesh', 'India', 'Nepal',
+            'Pakistan', 'Sri Lanka'
         ],
-
-        'Europe': [
-            'Switzerland', 'Iceland', 'Denmark', 'Norway', 'Finland', 'Netherlands',
-            'Sweden', 'Luxembourg', 'Ireland', 'Belgium', 'United Kingdom',
-            'Austria', 'Germany', 'France', 'Malta', 'Spain', 'Italy', 'Portugal',
-            'Greece', 'Cyprus', 'Czech Republic', 'Slovakia', 'Poland', 'Hungary',
-            'Slovenia', 'Croatia', 'Bosnia and Herzegovina', 'Estonia', 'Lithuania',
-            'Latvia', 'Romania', 'Bulgaria', 'Serbia', 'Montenegro',
-            'North Macedonia', 'Albania', 'Kosovo', 'Ukraine', 'Belarus',
-            'Moldova', 'Russia', 'Northern Cyprus', 'North Cyprus', 'Macedonia'
+        'Central Asia': [
+            'Uzbekistan', 'Kazakhstan', 'Turkmenistan', 'Kyrgyzstan', 'Tajikistan'
         ],
-
-        'North America': [
-            'Canada', 'United States', 'Mexico', 'Costa Rica', 'Panama',
-            'El Salvador', 'Guatemala', 'Trinidad and Tobago', 'Trinidad & Tobago',
-            'Jamaica', 'Dominican Republic', 'Nicaragua', 'Honduras',
-            'Haiti', 'Belize', 'Cuba', 'Puerto Rico'
-        ],
-
-        'South America': [
-            'Chile', 'Argentina', 'Uruguay', 'Colombia', 'Suriname', 'Ecuador',
-            'Bolivia', 'Peru', 'Paraguay', 'Venezuela', 'Brazil'
-        ],
-
-        'Oceania': [
-            'Australia', 'New Zealand'
-        ],
+        'Caucasus': [
+            'Armenia', 'Azerbaijan', 'Georgia'
+        ]
     }
 
     country_region_mapping = {
