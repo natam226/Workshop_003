@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from streaming import kafka_producer
+from streaming.kafka_producer import kafka_producer
 from sklearn.model_selection import train_test_split 
 
 

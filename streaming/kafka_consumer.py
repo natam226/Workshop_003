@@ -48,7 +48,7 @@ def insert_prediction(cursor, conn, data):
     conn.commit()
 
 
-def kafka_consumer(y_test_path, model_path='../models/trained_model.pkl', topic='happiness_data_topic', credentials_path='../credentials.json'):
+def kafka_consumer(model_path='../models/trained_model.pkl', topic='happiness_data_topic', credentials_path='../credentials.json'):
     db_params = load_db_credentials(credentials_path)
 
     conn = psycopg2.connect(**db_params)
@@ -84,4 +84,4 @@ def kafka_consumer(y_test_path, model_path='../models/trained_model.pkl', topic=
 
 
 if __name__ == "__main__":
-    kafka_consumer("../output/y_test.csv")
+    kafka_consumer()
