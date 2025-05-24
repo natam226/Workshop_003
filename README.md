@@ -11,8 +11,9 @@ This project aims to train a regression model to predict the happiness score of 
 - Scikit-learn
 - PostgreSQL
 
-## 📁 Structure
 
+## 📁 Structure
+```
 .
 ├── data/                    # CSV files with happiness data by year
 ├── models/                  # Trained model (.pkl file)
@@ -20,10 +21,13 @@ This project aims to train a regression model to predict the happiness score of 
 ├── streaming/               # Kafka producer and consumer scripts
 ├── database/                # Scripts to insert predictions into the database
 └── README.md
+```
+
 
 ## 🔍 Exploratory Data Analysis (EDA)
 
 We analyzed 5 CSV files from different years. Common features were identified and inconsistencies across datasets were handled to ensure uniformity in feature selection.
+
 
 ## ⚙️ ETL and Modeling Process
 
@@ -49,6 +53,7 @@ The following information is stored:
 - Features used for the prediction
 - Testing data
 - Predicted data (happiness score)
+
 
 ## 📊 Performance Metric
 
