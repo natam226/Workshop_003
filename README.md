@@ -60,13 +60,46 @@ The following information is stored:
 A regression performance metric (R²) was used to evaluate the model on the testing dataset. The best performing model was **_CatBoost Regressor_**, achieving an **_R²_** score of **_0.86_**.
 
 
-## 🚀 How to Run
+## 🛠️ Setup Instructions
+
+### Clone the repository
+
+Execute the following command to clone the repository
+
+```bash
+git clone https://github.com/natam226/Workshop_003
+
+```
+> From this point on all processes are done in Visual Studio Code
+
+### Create Virtual Environment
+```bash
+python -m venv venv
+source venv/bin/activate  #On Windows: venv\Scripts\activate
+```
+
+### Credentials
+To make a connection to the database you must have the database credentials in a JSON file called credentials. So this file must be created in the project folder, with the following syntax:
+
+```bash
+{
+    "dbname": "DB_NAME",
+    "user": "DB_USER",
+    "password": "DB_PASSWORD",
+    "host": "DB_HOST",
+    "port": "DB_PORT"    
+}
+```
+Ensure this file is included in `.gitignore`.
 
 ### Installing the dependencies
 The necessary dependencies are stored in a file named requirements.txt. To install the dependencies you can use the command
 ```bash
 pip install -r requirements.txt
 ```
+
+
+## 🚀 How to Run
 
 ### Initialize kafka
 
