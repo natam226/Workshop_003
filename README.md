@@ -1,6 +1,31 @@
-# Workshop 003: Happiness Score Prediction with Machine Learning and Kafka
+# Happiness Score Prediction | CatBoost & Kafka
 
-This project aims to train a regression model to predict the happiness score of different countries using historical data, with data streamed via Kafka. The pipeline includes exploratory data analysis (EDA), feature engineering, model training, real-time data streaming, prediction, and storing the results in a database.
+**A regression workflow from historical data exploration to streamed predictions.**
+
+Academic machine learning project using annual happiness data from **2015–2019**. It combines feature harmonization, exploratory analysis, regression model comparison and a Kafka producer/consumer demonstration that stores predictions in PostgreSQL.
+
+**[Explore the data](notebooks/001_EDA.ipynb)** · [Review model training](notebooks/002_ML.ipynb) · [Inspect the streaming workflow](streaming/feature_selection.py)
+
+## Result and evaluation context
+
+The project reports **CatBoost Regressor with R² = 0.86** on its **20% test split**. This is an internal experiment on historical observations. It is not a future-year forecast evaluation, and the streaming stage replays historical records rather than consuming a live public data feed.
+
+For interpreting the result, distinguish the regression experiment from a temporal backtest: repeated countries across years may affect how well a random split represents future deployment. Temporal or country-grouped evaluation is an extension, not a result claimed here.
+
+## What you can review
+
+- **Data preparation:** harmonization of changing column names across five annual datasets.
+- **Modeling:** exploratory analysis, common feature selection and regression comparison.
+- **Delivery:** a Kafka producer sends feature records; the consumer loads the model, predicts a score and persists the result in PostgreSQL.
+- **Engineering:** containerized Kafka services and separate producer/consumer scripts.
+
+**Stack:** Python · pandas · scikit-learn · CatBoost · Apache Kafka · PostgreSQL · Docker.
+
+---
+
+## Implementation guide
+
+This project aims to train a regression model to predict the happiness score of different countries using historical data, with data streamed via Kafka. The pipeline includes exploratory data analysis (EDA), feature engineering, model training, simulated streaming of historical data, prediction, and storing the results in a database.
 
 
 ## 🧪 Technologies Used
@@ -13,13 +38,14 @@ This project aims to train a regression model to predict the happiness score of 
 
 
 ## 📁 Structure
-```
-.
-├── data/                    # CSV files with happiness data by year
-├── models/                  # Trained model (.pkl file)
-├── notebooks/               # Jupyter notebooks for EDA, modeling, and prediction
-├── streaming/               # Kafka producer and consumer scripts
-├── database/                # Scripts to insert predictions into the database
+```text
+Workshop_003/
+├── data/           # Annual CSV inputs and prepared data
+├── models/         # Serialized trained model
+├── notebooks/      # EDA and model training
+├── streaming/      # Feature preparation, producer and consumer
+├── docker-compose.yml
+├── requirements.txt
 └── README.md
 ```
 
@@ -108,14 +134,16 @@ Open a terminal in Visual Studio Code and start docker
 docker-compose up -d --build
 ```
 
-Run this command in a terminal to initialize the consumer
+From the repository root, run this command in a terminal to initialize the consumer
 ```bash
-python3 kafka_consumer.py 
+cd streaming
+python kafka_consumer.py 
 ```
 
-Open a new terminal and run this command to initialize the producer
+Open a new terminal at the repository root and run this command to initialize the producer
 ```bash
-python3 feature_selection.py
+cd streaming
+python feature_selection.py
 ```
 
 
